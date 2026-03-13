@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manoj Garments 93 | Luxury Family Fashion</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins', sans-serif;}
+body{background:#050505;color:#fff;overflow-x:hidden;scroll-behavior:smooth;}
+
+/* --- ANIMATIONS --- */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes zoomFade {
+    0% { transform: scale(1); opacity: 0; }
+    10% { opacity: 1; }
+    33% { opacity: 1; }
+    43% { opacity: 0; }
+    100% { transform: scale(1.15); opacity: 0; }
+}
+@keyframes shimmer {
+    0% { transform: translateX(-150%) skewX(-20deg); }
+    100% { transform: translateX(150%) skewX(-20deg); }
+}
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* SCROLL REVEAL CLASS */
+.reveal { opacity: 0; transform: translateY(60px); transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+/* --- HERO SECTION WITH CINEMATIC SLIDER --- */
+.hero {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Trendy Background Slider */
+.bg-slideshow {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -2;
+    background: #000;
+}
+.bg-slide {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-size: cover;
+    background-position: top center;
+    opacity: 0;
+    animation: zoomFade 15s infinite;
+}
+/* Slide 1: Premium Boutique Rack */
+.bg-slide:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80'); animation-delay: 0s; }
+/* Slide 2: Trendy Women's Fashion */
+.bg-slide:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1600&q=80'); animation-delay: 5s; }
+/* Slide 3: Sharp Men's Fashion */
+.bg-slide:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1480455624313-e29b44bbfde1?auto=format&fit=crop&w=1600&q=80'); animation-delay: 10s; }
+
+.overlay {
+    position: absolute;
+    width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.5), rgba(0,0,0,0.9));
+    z-index: -1;
+}
+
+/* Hero Content */
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 6vw;
+    color: #d4af37;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.8);
+    animation: fadeInUp 1s ease-out forwards;
+}
+.tagline {
+    font-size: 22px;
+    letter-spacing: 4px;
+    margin-top: 10px;
+    opacity: 0;
+    animation: fadeInUp 1s ease-out 0.3s forwards;
+}
+.offer {
+    font-size: 24px;
+    margin-top: 25px;
+    height: 35px;
+    font-weight: 300;
+    color: #fff;
+    opacity: 0;
+    animation: fadeInUp 1s ease-out 0.6s forwards;
+    transition: opacity 0.5s;
+}
+
+/* BUTTONS */
+.btn {
+    padding: 16px 45px;
+    background: linear-gradient(45deg, #b8860b, #ffd700, #b8860b);
+    background-size: 200% auto;
+    color: #000;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 25px;
+    letter-spacing: 2px;
+    box-shadow: 0 10px 20px rgba(212,175,55,0.3);
+    transition: 0.4s;
+    opacity: 0;
+    animation: fadeInUp 1s ease-out 0.9s forwards;
+}
+.btn:hover {
+    background-position: right center;
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(212,175,55,0.6);
+}
+
+/* --- OFFER POSTER --- */
+.offer-poster {
+    padding: 80px 20px;
+    text-align: center;
+    background: #050505;
+}
+.offer-box {
+    position: relative;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    padding: 50px;
+    border-radius: 20px;
+    max-width: 750px;
+    margin: auto;
+    background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 20px rgba(212,175,55,0.1);
+    overflow: hidden;
+}
+.offer-box::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 50%; height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255, 215, 0, 0.1), transparent);
+    animation: shimmer 4s infinite;
+}
+.offer-box h2 {
+    font-family: 'Playfair Display', serif;
+    color: #ffd700;
+    font-size: 42px;
+    letter-spacing: 2px;
+    animation: float 4s ease-in-out infinite;
+}
+.offer-box p {
+    margin-top: 15px;
+    font-size: 20px;
+    color: #ddd;
+}
+.btn-outline {
+    background: transparent;
+    border: 2px solid #d4af37;
+    color: #d4af37;
+    box-shadow: none;
+}
+.btn-outline:hover {
+    background: rgba(212, 175, 55, 0.1);
+    color: #fff;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+}
+
+/* --- CATEGORIES --- */
+.categories {
+    padding: 100px 5%;
+    background: #0a0a0a;
+    text-align: center;
+}
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 45px;
+    color: #d4af37;
+    margin-bottom: 50px;
+    position: relative;
+    display: inline-block;
+}
+.section-title::after {
+    content: '';
+    position: absolute;
+    width: 50%; height: 2px;
+    background: #d4af37;
+    bottom: -10px; left: 25%;
+}
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+.category-card {
+    height: 450px;
+    overflow: hidden;
+    border-radius: 15px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    cursor: pointer;
+}
+.category-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: top; /* Keeps models' faces visible */
+    transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    filter: brightness(0.65);
+}
+.category-card:hover img {
+    transform: scale(1.08);
+    filter: brightness(0.9);
+}
+.category-title {
+    position: absolute;
+    bottom: -50px; 
+    width: 100%;
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    text-shadow: 2px 2px 10px #000;
+    transition: 0.5s ease;
+    opacity: 0;
+}
+.category-card:hover .category-title {
+    bottom: 30px;
+    opacity: 1;
+}
+
+/* --- PRODUCTS --- */
+.products {
+    padding: 80px 5%;
+    background: #111;
+    text-align: center;
+}
+#productList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    margin-top: 20px;
+}
+.product {
+    background: #1a1a1a;
+    border: 1px solid #222;
+    border-radius: 15px;
+    overflow: hidden;
+    transition: 0.4s;
+    padding-bottom: 20px;
+    position: relative;
+}
+.product:hover {
+    transform: translateY(-15px);
+    border-color: #d4af37;
+    box-shadow: 0 15px 30px rgba(212,175,55,0.15);
+}
+.product img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    object-position: top;
+    transition: 0.5s;
+}
+.product:hover img {
+    filter: brightness(1.1);
+}
+.product p { margin: 20px 0 5px 0; font-size: 20px; letter-spacing: 1px; }
+.product span { color: #d4af37; font-weight: 600; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; }
+
+/* --- FLOAT WHATSAPP --- */
+.whatsapp {
+    position: fixed;
+    bottom: 30px; right: 30px;
+    background: #25D366;
+    width: 65px; height: 65px;
+    border-radius: 50%;
+    display: flex; justify-content: center; align-items: center;
+    font-size: 35px;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(37,211,102,0.4);
+    z-index: 1000;
+    transition: 0.3s;
+}
+.whatsapp:hover {
+    transform: scale(1.1) rotate(-10deg);
+    box-shadow: 0 10px 25px rgba(37,211,102,0.6);
+}
+
+@media (max-width: 768px) {
+    .hero h1 { font-size: 10vw; }
+    .tagline { font-size: 16px; }
+}
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+    <div class="bg-slideshow">
+        <div class="bg-slide"></div>
+        <div class="bg-slide"></div>
+        <div class="bg-slide"></div>
+    </div>
+    
+    <div class="overlay"></div>
+
+    <h1>MANOJ GARMENTS 93</h1>
+    <p class="tagline">Quality Matters</p>
+
+    <div class="offer" id="offerText">Loading exclusive offers...</div>
+
+    <a href="https://mybillbook.in/store/manoj_garments_93" target="_blank" style="text-decoration:none;">
+        <button class="btn">DISCOVER COLLECTION</button>
+    </a>
+</section>
+
+<section class="offer-poster">
+    <div class="offer-box reveal">
+        <h2>BUY 2 GET 1 FREE</h2>
+        <p>On MRP | Premium Quality | Limited Time Offer</p>
+        <p style="margin-top:15px; color:#d4af37; font-weight: 500;">✨ Flat ₹25 OFF on Google Review ✨</p>
+
+        <a href="https://search.google.com/local/writereview?placeid=ChIJB3hcYgAXDTkRA1paw0eSgCk" target="_blank" style="text-decoration:none;">
+            <button class="btn btn-outline">⭐ Rate Us on Google Maps</button>
+        </a>
+    </div>
+</section>
+
+<section class="categories">
+    <h2 class="section-title reveal">Shop by Category</h2>
+    <div class="category-grid">
+
+        <div class="category-card reveal" style="transition-delay: 0.1s;">
+            <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=800&q=80" alt="Men's Wear">
+            <div class="category-title">Men's Wear</div>
+        </div>
+
+        <div class="category-card reveal" style="transition-delay: 0.3s;">
+            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80" alt="Women's Wear">
+            <div class="category-title">Women's Wear</div>
+        </div>
+
+        <div class="category-card reveal" style="transition-delay: 0.5s;">
+            <img src="https://images.unsplash.com/photo-1604467794349-0b74285de7e7?auto=format&fit=crop&w=800&q=80" alt="Kid's Wear">
+            <div class="category-title">Kid's Wear</div>
+        </div>
+
+    </div>
+</section>
+
+<section class="products">
+    <h2 class="section-title reveal">New Arrivals</h2>
+    <div id="productList"></div>
+</section>
+
+<div class="whatsapp" onclick="window.open('https://wa.me/918104572450')">💬</div>
+
+<script>
+/* --- SCROLL REVEAL ANIMATION --- */
+function reveal() {
+    var reveals = document.querySelectorAll(".reveal");
+    for (var i = 0; i < reveals.length; i++) {
+        var windowHeight = window.innerHeight;
+        var elementTop = reveals[i].getBoundingClientRect().top;
+        var elementVisible = 100;
+        
+        if (elementTop < windowHeight - elementVisible) {
+            reveals[i].classList.add("active");
+        }
+    }
+}
+window.addEventListener("scroll", reveal);
+reveal(); 
+
+/* --- AUTO OFFERS --- */
+let offers=[
+    "✨ Premium Collection Available Now ✨",
+    "🔥 BUY 2 GET 1 FREE on MRP 🔥",
+    "🌟 Flat ₹25 OFF on Google Review 🌟",
+    "👑 Luxury Family Fashion 👑"
+];
+let i=0;
+let el=document.getElementById("offerText");
+function changeOffer(){
+    el.style.opacity = 0;
+    setTimeout(()=>{
+        el.innerText = offers[i];
+        el.style.opacity = 1;
+        i = (i+1) % offers.length;
+    }, 500);
+}
+setInterval(changeOffer, 3500);
+changeOffer();
+
+/* --- LOAD TRENDY PRODUCTS --- */
+let products=[
+    // ☀️ Men's Summer Wear
+    {name:"Premium Cotton Half-Sleeve Shirt", image:"https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=600&q=80", category:"Men's"},
+    {name:"Korean Baggy Fit Jeans", image:"https://images.unsplash.com/photo-1604176354204-9268737828e4?auto=format&fit=crop&w=600&q=80", category:"Men's"},
+    
+    // ☀️ Women's Summer Wear
+    {name:"Breezy Floral Summer Maxi", image:"https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?auto=format&fit=crop&w=600&q=80", category:"Women's"},
+    {name:"Lightweight Cotton Casual Top", image:"https://images.unsplash.com/photo-1515347619362-75fe3f0e8f3b?auto=format&fit=crop&w=600&q=80", category:"Women's"},
+    
+    // ☀️ Kids' Summer Wear
+    {name:"Girls Floral Summer Frock", image:"https://images.unsplash.com/photo-1622290291468-a28f7a7dc6a8?auto=format&fit=crop&w=600&q=80", category:"Kid's"},
+    {name:"Boys Cool Cotton Shorts Set", image:"https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=600&q=80", category:"Kid's"},
+    {name:"Toddler Summer Casual Romper", image:"https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=600&q=80", category:"Kid's"},
+    {name:"Kids Breathable Play Wear", image:"https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=600&q=80", category:"Kid's"}
+];
+
+let html="";
+products.forEach((p, index) => {
+    let delay = (index % 4) * 0.15; 
+    
+    // The 'onerror' below is a failsafe. If a link breaks, it loads a default fashion photo instead of an error icon!
+    html+=`
+    <div class="product reveal" style="transition-delay: ${delay}s;">
+        <img src="${p.image}" alt="${p.name}" onerror="this.src='https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=600&q=80'">
+        <p>${p.name}</p>
+        <span>${p.category}</span>
+    </div>`;
+});
+document.getElementById("productList").innerHTML=html;
+setTimeout(reveal, 100);
+</script>
+
+</body>
+</html>
